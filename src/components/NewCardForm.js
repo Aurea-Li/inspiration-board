@@ -61,7 +61,7 @@ class NewCardForm extends Component {
 
     return(
       <div className="new-card-form">
-        <section class="new-card-form__header">
+        <section className="new-card-form__header">
           New Card Form
           <ul>
             {errorMessages}

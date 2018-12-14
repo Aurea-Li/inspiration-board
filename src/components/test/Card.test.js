@@ -10,7 +10,7 @@ describe('Card', () => {
       text: 'be happy!'
     }
     const wrapper = shallow(
-      <Card card={testCard}/>
+      <Card card={testCard} deleteCard={ () => {} }/>
     );
 
     expect(wrapper).toMatchSnapshot();

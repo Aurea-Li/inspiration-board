@@ -4,6 +4,23 @@ exports[`Card that it matches an existing snapshot 1`] = `
 <div
   className="card"
 >
-  be happy!
+  <div
+    className="card__content"
+  >
+    <div
+      className="card__content-emoji"
+    />
+    <div
+      className="card__content-text"
+    >
+      be happy!
+    </div>
+    <button
+      className="card__delete"
+      onClick={[Function]}
+    >
+      Delete
+    </button>
+  </div>
 </div>
 `;

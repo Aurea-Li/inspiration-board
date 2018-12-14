@@ -5,8 +5,10 @@ import './Card.css';
 
 const Card = (props) => {
 
+  console.log(typeof props.deleteCard);
+
   const {text, emoji } =  props.card;
-  
+
   return(
     <div className="card">
 
