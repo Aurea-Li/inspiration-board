@@ -4,14 +4,15 @@ import PropTypes from 'prop-types';
 
 import './Card.css';
 
-const Card = ({ text, id, deleteCard }) => {
+const Card = (props) => {
 
+  const {text } =  props.card;
 
   return(
     <div className="card">
       {text}
       <button
-        onClick={deleteCard}>
+        onClick={props.deleteCard}>
         Delete
       </button>
     </div>
