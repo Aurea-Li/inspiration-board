@@ -64,19 +64,19 @@ class NewCardForm extends Component {
       });
 
     return(
-      <div>
-        <section className="errors">
+      <div className="new-card-form">
+        <section>
+          New Card Form
           <ul>
             {errorMessages}
           </ul>
         </section>
 
         <form
-          className="new-card-form"
           onSubmit={this.onFormSubmit}
           >
-          <div>
-            <label htmlFor="text">Text:</label>
+          <div className="new-card-form__form">
+            <label htmlFor="text" className="new-card-form__form-label">Text:</label>
             <textarea
               name="text"
               value={this.state.text}
@@ -84,9 +84,10 @@ class NewCardForm extends Component {
               className="new-card-form__form-textarea"
               />
           </div>
-          <div>
-            <label htmlFor="emoji">Emoji:</label>
-            <select name="emoji" value={this.state.emoji} onChange={this.onInputChange}>
+          <div className="new-card-form__form">
+            <label htmlFor="emoji" className="new-card-form__form-label">Emoji:</label>
+            <select name="emoji" value={this.state.emoji} onChange={this.onInputChange}
+              className="new-card-form__form-select">
               {emojiList}
             </select>
           </div>
