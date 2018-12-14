@@ -34,6 +34,30 @@ class Board extends Component {
     });
   }
 
+  deleteCard = (id) => {
+    const DELETE_CARD_URL = `https://inspiration-board.herokuapp.com/cards/${id}`;
+
+    axios.post((DELETE_CARD_URL) => {
+
+      const { newCards } = [...this.state]
+
+      const index = newCards.findIndex(card => card.id === id);
+      console.log(index);
+      newCards.splice(index, 1);
+
+      this.setState({
+        cards: newCards
+      });
+
+    })
+    .catch((error) => {
+      this.setState({
+        error: error.message
+      });
+    });
+
+  }
+
   render() {
 
     const cardList = this.state.cards.map((card, i) => {
@@ -45,7 +69,9 @@ class Board extends Component {
         text: text
       };
 
-      return <Card key={i} card={formattedCard} />
+      return <Card key={i}
+                   card={formattedCard}
+                   deleteCard={() => this.deleteCard(id)} />
     })
 
     return (

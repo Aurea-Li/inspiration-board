@@ -4,17 +4,23 @@ import PropTypes from 'prop-types';
 
 import './Card.css';
 
-const Card = (props) => {
+const Card = ({ text, id, deleteCard }) => {
+
 
   return(
     <div className="card">
-      {props.card.text}
+      {text}
+      <button
+        onClick={deleteCard}>
+        Delete
+      </button>
     </div>
   );
 };
 
 Card.propTypes = {
   card: PropTypes.object.isRequired,
+  deleteCard: PropTypes.func.isRequired
 };
 
 export default Card;
