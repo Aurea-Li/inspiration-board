@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import axios from 'axios';
+import axios from 'axios';
 
 import './Board.css';
 import Card from './Card';
@@ -12,21 +12,45 @@ class Board extends Component {
     super();
 
     this.state = {
-      cards: [
-        "It don't be like it is, but it do."
-      ],
+      cards: [],
     };
+  }
+
+  componentDidMount() {
+    const GET_ALL_CARDS_URL = `https://inspiration-board.herokuapp.com/boards/${this.props.boardName}/cards`;
+
+    axios.get(GET_ALL_CARDS_URL)
+
+    .then((response) => {
+      this.setState({
+        cards: response.data
+      })
+    })
+
+    .catch((error) => {
+      this.setState({
+        error: error.message
+      });
+    });
   }
 
   render() {
 
-    const cards = this.state.cards.map((card, i) => {
-      return <Card key={i} card={card} />
+    const cardList = this.state.cards.map((card, i) => {
+
+      const { id, text } = card.card;
+      
+      const formattedCard = {
+        id: id,
+        text: text
+      };
+
+      return <Card key={i} card={formattedCard} />
     })
 
     return (
       <div>
-        {cards}
+        {cardList}
       </div>
     )
   }
@@ -35,7 +59,7 @@ class Board extends Component {
 
 Board.propTypes = {
   url: PropTypes.string.isRequired,
-  boardname: PropTypes.string.isRequired
+  boardName: PropTypes.string.isRequired
 };
 
 export default Board;

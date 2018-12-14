@@ -1,21 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 // import emoji from 'emoji-dictionary';
 
 import './Card.css';
 
-class Card extends Component {
-  render() {
-    return (
-      <div className="card">
-        {this.props.card}
-      </div>
-    )
-  }
-}
+const Card = (props) => {
+
+  return(
+    <div className="card">
+      {props.card.text}
+    </div>
+  );
+};
 
 Card.propTypes = {
-  card: PropTypes.string.isRequired,
+  card: PropTypes.object.isRequired,
 };
 
 export default Card;
