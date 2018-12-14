@@ -5,7 +5,7 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-// import CARD_DATA from '../data/card-data.json';
+import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
   constructor() {
@@ -34,34 +34,34 @@ class Board extends Component {
     const ADD_CARD_URL = `https://inspiration-board.herokuapp.com/boards/${this.props.boardName}/cards`;
 
     axios.post(ADD_CARD_URL, cardData)
-      .then((response) => {
+    .then((response) => {
 
-        console.log(response.data);
-        const updatedCardList = [ ...this.state.cards, response.data]
+      console.log(response.data);
+      const updatedCardList = [ ...this.state.cards, response.data]
 
-        this.setState({ cards: updatedCardList })
-      })
-      .catch((error) => {
-        console.log(error);
-        this.setState({ errorMessages: error });
-      });
+      this.setState({ cards: updatedCardList })
+    })
+    .catch((error) => {
+      console.log(error);
+      this.setState({ errorMessages: error });
+    });
 
   }
 
-  // deleteCard = (id) => {
-  //   const DELETE_CARD_URL = `https://inspiration-board.herokuapp.com/cards/${id}`;
-  //
-  //   axios.delete((DELETE_CARD_URL)
-  //     .then((response) => {
-  //       const { newCards } = [...this.state]
-  //       const index = newCards.findIndex(card => card.id === id);
-  //       newCards.splice(index, 1);
-  //       this.setState({ cards: newCards });
-  //     })
-  //     .catch((error) => {
-  //       this.setState({ error: error.message });
-  //     });
-  // }
+  deleteCard = (id) => {
+    const DELETE_CARD_URL = `https://inspiration-board.herokuapp.com/cards/${id}`;
+
+    axios.delete(DELETE_CARD_URL)
+    .then((response) => {
+      const { newCards } = [...this.state];
+      const index = newCards.findIndex(card => card.id === id);
+      newCards.splice(index, 1);
+      this.setState({ cards: newCards });
+    })
+    .catch((error) => {
+      this.setState({ error: error.message });
+    });
+  }
 
 
 
@@ -78,8 +78,8 @@ class Board extends Component {
       };
 
       return <Card key={i}
-                   card={formattedCard}
-                   deleteCard={() => this.deleteCard(id)} />
+        card={formattedCard}
+        deleteCard={() => this.deleteCard(id)} />
     })
 
     return (
