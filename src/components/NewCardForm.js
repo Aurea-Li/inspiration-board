@@ -12,7 +12,8 @@ class NewCardForm extends Component {
 
     const baseState = {
       text: '',
-      emoji: ''
+      emoji: '',
+      errorMessages: []
     };
 
     this.state = {...baseState};
@@ -30,6 +31,11 @@ class NewCardForm extends Component {
 
   onFormSubmit = (e) => {
     e.preventDefault();
+
+    if (this.state.text === '') {
+      this.setState({ errorMessages: [...this.state.errorMessages, "text cannot be blank"]});
+      return;
+    }
 
     const newCard = {...this.state};
 
@@ -53,8 +59,17 @@ class NewCardForm extends Component {
       return (<option value = {emojiCode} key = {i}>{emojiCode}</option>)
     });
 
+    const errorMessages = this.state.errorMessages.map((message, i) => {
+      return <li key={i}>{message}</li>;
+      });
+
     return(
       <div>
+        <section className="errors">
+          <ul>
+            {errorMessages}
+          </ul>
+        </section>
 
         <form
           className="new-card-form"

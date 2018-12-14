@@ -13,6 +13,7 @@ class Board extends Component {
 
     this.state = {
       cards: [],
+      errorMessages: []
     };
   }
 
@@ -25,7 +26,9 @@ class Board extends Component {
       this.setState({ cards: response.data });
     })
     .catch((error) => {
-      this.setState({ error: error.message });
+      this.setState({
+        errorMessages: [...this.state.errorMessages, error.message]
+      });
     });
   }
 
@@ -35,17 +38,14 @@ class Board extends Component {
 
     axios.post(ADD_CARD_URL, cardData)
     .then((response) => {
-
-      console.log('card data is', cardData);
-
       const updatedCardList = [ ...this.state.cards, response.data]
-
       this.setState({ cards: updatedCardList })
     })
     .catch((error) => {
-      this.setState({ errorMessages: error });
+      this.setState({
+        errorMessages: [...this.state.errorMessages, error.message]
+      });
     });
-
   }
 
   deleteCard = (id) => {
@@ -53,18 +53,15 @@ class Board extends Component {
 
     axios.delete(DELETE_CARD_URL)
     .then(() => {
-
       const updatedCardList = [...this.state.cards];
       const index = updatedCardList.findIndex(card => card.id === id);
       updatedCardList.splice(index, 1);
       this.setState({ cards: updatedCardList });
     })
     .catch((error) => {
-      this.setState({ error: error.message });
+      this.setState({ errorMessages: [...this.state.errorMessages, error.message] });
     });
   }
-
-
 
   render() {
 
@@ -81,16 +78,25 @@ class Board extends Component {
       return <Card key={i}
         card={formattedCard}
         deleteCard={() => this.deleteCard(id)} />
-    })
+    });
+
+    console.log('error messages',this.state.errorMessages);
+    const errorMessages = this.state.errorMessages.map((message, i) => {
+      return <li key={i}>{message}</li>;
+      });
 
     return (
       <div>
+        <section className="errors">
+          <ul>
+            {errorMessages}
+          </ul>
+        </section>
         {cardList}
         <NewCardForm addCard={this.addCard} />
       </div>
     )
   }
-
 }
 
 Board.propTypes = {
