@@ -36,13 +36,11 @@ class Board extends Component {
     axios.post(ADD_CARD_URL, cardData)
     .then((response) => {
 
-      console.log(response.data);
       const updatedCardList = [ ...this.state.cards, response.data]
 
       this.setState({ cards: updatedCardList })
     })
     .catch((error) => {
-      console.log(error);
       this.setState({ errorMessages: error });
     });
 
@@ -52,11 +50,12 @@ class Board extends Component {
     const DELETE_CARD_URL = `https://inspiration-board.herokuapp.com/cards/${id}`;
 
     axios.delete(DELETE_CARD_URL)
-    .then((response) => {
-      const { newCards } = [...this.state];
-      const index = newCards.findIndex(card => card.id === id);
-      newCards.splice(index, 1);
-      this.setState({ cards: newCards });
+    .then(() => {
+
+      const updatedCardList = [...this.state.cards];
+      const index = updatedCardList.findIndex(card => card.id === id);
+      updatedCardList.splice(index, 1);
+      this.setState({ cards: updatedCardList });
     })
     .catch((error) => {
       this.setState({ error: error.message });
@@ -69,7 +68,6 @@ class Board extends Component {
 
     const cardList = this.state.cards.map((card, i) => {
 
-      console.log(card);
       const { id, text } = card.card;
 
       const formattedCard = {

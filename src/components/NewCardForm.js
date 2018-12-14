@@ -35,7 +35,7 @@ class NewCardForm extends Component {
     this.setState(this.baseState);
 
     this.props.addCard(newCard);
-    console.log('created a new card')
+
     this.setState({
       errorMessages: []
     });
