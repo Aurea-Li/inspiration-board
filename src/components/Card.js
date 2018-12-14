@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import emoji from 'emoji-dictionary';
 
 import './Card.css';
 
 const Card = (props) => {
 
-  const {text } =  props.card;
+  const {text, emoji } =  props.card;
 
   return(
     <div className="card">
+      {emoji}
       {text}
       <button
         onClick={props.deleteCard}>

@@ -25,6 +25,7 @@ class NewCardForm extends Component {
     const newState = {};
     newState[name] = value;
     this.setState(newState);
+
   }
 
   onFormSubmit = (e) => {
@@ -45,6 +46,13 @@ class NewCardForm extends Component {
 
   render () {
 
+    const emojiList = EMOJI_LIST.map((emojiText, i) => {
+
+      const emojiCode = emoji.getUnicode(emojiText);
+
+      return (<option value = {emojiCode} key = {i}>{emojiCode}</option>)
+    });
+
     return(
       <div>
 
@@ -53,24 +61,24 @@ class NewCardForm extends Component {
           onSubmit={this.onFormSubmit}
           >
           <div>
-            <label htmlFor="text">text:</label>
+            <label htmlFor="text">Text:</label>
             <textarea
               name="text"
               value={this.state.text}
               onChange={this.onInputChange}
+              className="new-card-form__form-textarea"
               />
           </div>
           <div>
-            <label htmlFor="emoji">emoji:</label>
-            <input
-              name="emoji"
-              value={this.state.emoji}
-              onChange={this.onInputChange}
-              />
+            <label htmlFor="emoji">Emoji:</label>
+            <select name="emoji" value={this.state.emoji} onChange={this.onInputChange}>
+              {emojiList}
+            </select>
           </div>
           <input
             type="submit"
             value="Add Card"
+            className="new-card-form__form-button"
             />
         </form>
       </div>

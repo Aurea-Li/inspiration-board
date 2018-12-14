@@ -5,7 +5,7 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-import CARD_DATA from '../data/card-data.json';
+// import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
   constructor() {
@@ -35,6 +35,8 @@ class Board extends Component {
 
     axios.post(ADD_CARD_URL, cardData)
     .then((response) => {
+
+      console.log('card data is', cardData);
 
       const updatedCardList = [ ...this.state.cards, response.data]
 
@@ -68,11 +70,12 @@ class Board extends Component {
 
     const cardList = this.state.cards.map((card, i) => {
 
-      const { id, text } = card.card;
+      const { id, text, emoji } = card.card;
 
       const formattedCard = {
         id: id,
-        text: text
+        text: text,
+        emoji: emoji
       };
 
       return <Card key={i}
