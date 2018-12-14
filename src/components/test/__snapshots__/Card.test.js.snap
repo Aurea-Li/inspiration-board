@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card that it matches an existing snapshot 1`] = `
+<div
+  className="card"
+>
+  be happy!
+</div>
+`;

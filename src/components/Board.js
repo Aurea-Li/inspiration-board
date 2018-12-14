@@ -24,7 +24,7 @@ class Board extends Component {
     .then((response) => {
       this.setState({
         cards: response.data
-      })
+      });
     })
 
     .catch((error) => {
@@ -39,7 +39,7 @@ class Board extends Component {
     const cardList = this.state.cards.map((card, i) => {
 
       const { id, text } = card.card;
-      
+
       const formattedCard = {
         id: id,
         text: text
