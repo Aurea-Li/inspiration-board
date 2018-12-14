@@ -26,7 +26,6 @@ class NewCardForm extends Component {
     const newState = {};
     newState[name] = value;
     this.setState(newState);
-
   }
 
   onFormSubmit = (e) => {
@@ -38,15 +37,12 @@ class NewCardForm extends Component {
     }
 
     const newCard = {...this.state};
-
     this.setState(this.baseState);
-
     this.props.addCard(newCard);
 
     this.setState({
       errorMessages: []
     });
-
   }
 
 
@@ -65,7 +61,7 @@ class NewCardForm extends Component {
 
     return(
       <div className="new-card-form">
-        <section>
+        <section class="new-card-form__header">
           New Card Form
           <ul>
             {errorMessages}

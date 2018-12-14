@@ -5,7 +5,6 @@ import axios from 'axios';
 import './Board.css';
 import Card from './Card';
 import NewCardForm from './NewCardForm';
-// import CARD_DATA from '../data/card-data.json';
 
 class Board extends Component {
   constructor() {
@@ -38,8 +37,9 @@ class Board extends Component {
 
     axios.post(ADD_CARD_URL, cardData)
     .then((response) => {
-      const updatedCardList = [ ...this.state.cards, response.data]
-      this.setState({ cards: updatedCardList })
+      this.setState({
+        cards: [ ...this.state.cards, response.data]
+      });
     })
     .catch((error) => {
       this.setState({
@@ -56,6 +56,7 @@ class Board extends Component {
       const updatedCardList = [...this.state.cards];
       const index = updatedCardList.findIndex(card => card.id === id);
       updatedCardList.splice(index, 1);
+
       this.setState({ cards: updatedCardList });
     })
     .catch((error) => {
@@ -80,15 +81,14 @@ class Board extends Component {
         deleteCard={() => this.deleteCard(id)} />
     });
 
-    console.log('error messages',this.state.errorMessages);
     const errorMessages = this.state.errorMessages.map((message, i) => {
       return <li key={i}>{message}</li>;
       });
 
     return (
-      <div>
-        <section className="errors">
-          <ul>
+      <div className="board">
+        <section className="validation-errors-display">
+          <ul className="validation-errors-display__list">
             {errorMessages}
           </ul>
         </section>
